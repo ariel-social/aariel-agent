@@ -10,6 +10,10 @@ Aariel schedules posts to connected SNS accounts. Use the `aariel` CLI with `AAR
 
 This package is a derivative of [postiz-agent](https://github.com/gitroomhq/postiz-agent) (AGPL-3.0). Keep that notice.
 
+## Approve the feed the customer reviewed
+
+Open `list_pending_posts(view="review")` and show the account, the whole feed, media and time. After the customer chooses a post, send that post's ID and the exact displayed `review.revision` in `confirm_posts(items=[{postId, expectedRevision, action:"schedule"}])` or the single-post form. If the server returns `review_required` or `review_changed`, show the current feed and ask for a fresh decision. For CLI use `posts:pending --post-id <id>` and then `posts:confirm <id> --revision <revision>`. For a promotional draft, set `includeMyReferral` only if the connected partner requested their own referral link.
+
 ## Rules
 
 1. Authenticate first. `aariel auth:status` must succeed.
