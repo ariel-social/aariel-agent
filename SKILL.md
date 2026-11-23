@@ -12,7 +12,7 @@ This package is a derivative of [postiz-agent](https://github.com/gitroomhq/post
 
 ## Approve the feed the customer reviewed
 
-Open `list_pending_posts(view="review")` and show the account, the whole feed, media and time. After the customer chooses a post, send that post's ID and the exact displayed `review.revision` in `confirm_posts(items=[{postId, expectedRevision, action:"schedule"}])` or the single-post form. If the server returns `review_required` or `review_changed`, show the current feed and ask for a fresh decision. For CLI use `posts:pending --post-id <id>` and then `posts:confirm <id> --revision <revision>`. For a promotional draft, set `includeMyReferral` only if the connected partner requested their own referral link.
+Open `list_pending_posts(view="review")` and show the account, the whole feed, media and time. After the customer chooses a post, send that post's ID and the exact displayed `review.revision` in `confirm_posts(items=[{postId, expectedRevision, action:"schedule"}])` or the single-post form. If the server returns `review_required` or `review_changed`, show the current feed and ask for a fresh decision. For CLI use `posts:pending --post-id <id>` and then `posts:confirm <id> --revision <revision>`. When Ariel offers the connected partner's referral link and the customer accepts the creative proposal, call `arielIntroPostDraftTool(action="prepare")`. Let the customer choose SNS accounts and time. Use the host's image tool if available, otherwise use a customer-approved file, then attach the saved media. Add the user's link and ad disclosure with `includeMyReferral:true`. Show the saved feed and ask the customer to approve each post before calling `confirm_posts`.
 
 ## Rules
 
