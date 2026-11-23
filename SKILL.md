@@ -8,7 +8,7 @@ metadata: {"openclaw":{"requires":{"bins":["aariel"],"env":["AARIEL_API_KEY"]}}}
 
 Aariel schedules posts to connected SNS accounts. Use the `aariel` CLI with `AARIEL_API_KEY` or `aariel auth:login`, or connect over MCP. Both work on every plan; how much you can use differs by plan (`aariel usage` or MCP `usageTool`).
 
-This package is a derivative of [postiz-agent](https://github.com/gitroomhq/postiz-agent) (AGPL-3.0). Keep that notice.
+This package is proprietary and all rights are reserved; see `LICENSE`.
 
 ## Rules
 
