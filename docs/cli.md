@@ -1,0 +1,13 @@
+# AI Agents CLI
+
+Install this package and run `aariel`. Use `aariel auth:login` (RFC 8628 `POST /oauth/device/code` and `POST /oauth/token` on the API origin, client id `aariel-cli`) or `AARIEL_API_KEY`. Commands include `posts:create`, `posts:pending`, `posts:confirm`, `posts:list`, `posts:delete`, `upload`, `analytics:platform` and `analytics:post`. Not every listed command is exposed on current deployments; see the "Command availability" section in the README. `posts:create` defaults to draft. `--type schedule` books a time, and `--now` or `--type now` publishes immediately. A channel on 확인 후 발행 saves a schedule or now post and waits; `posts:confirm` releases it. A channel on 바로 발행 schedules or publishes as requested. `posts:pending` lists posts that are waiting and can filter by account, group, and source (`tool`, `rss`, `app`). `aariel upload` uses `POST /public/v1/upload` up to 98MB; an MP4 or MOV above that, up to 200MB, uses a short-lived upload link. MCP upload tools are `create_upload_link`, `get_upload_status`, and `upload_from_url` (`content-write`, same plan gate as other MCP writes, 15-minute single-use link, images 10MB, MP4/MOV 200MB, public HTTPS only).
+
+Product and performance commands: `aariel products:upsert <externalId>` (`--source`, `--title`, `--url`, `--affiliate-url`, `--price`, `--image-url`, `--description`, or `--file`), `aariel products:hide <id>` (`--unhide` shows it again), `aariel products:affiliate-add` and `aariel performance --days 7|30|90`. They call `PUT /public/v1/products/:externalId`, `PUT /public/v1/products/:id/visibility`, `POST /public/v1/products/affiliate` and `GET /public/v1/performance`. The product writes need `content-write` and share the daily product limit and the new-product AI-connection cap (`product_quota_day` / `product_quota_month`) with MCP; `PATCH /public/v1/products/:id` edits one product over REST (`productUpdateTool`) and has no CLI command. Performance needs `read`.
+
+MCP only, no CLI command yet: `startGuideTool` (call it first), `webLinksTool`, `partnerStatusTool`, `arielIntroSettingTool`, `arielIntroPostDraftTool`, `productUpdateTool`, `accountRenameTool`, `accountGroupTool`, `accountPublishModeTool` and `accountPostingAllowedTool`. Scopes are listed in `SKILL.md`.
+
+Plan: MCP sign-in, an `arl_` key and the `aariel` CLI work on every plan. How much you can use differs by plan; `usageTool` (MCP) or `aariel usage` shows it.
+
+This is not listed in a marketplace. Tell people to add the MCP link or install the skill. Do not call it an official connector.
+
+Local API origin: `http://localhost:3000` (`AARIEL_API_URL`).
